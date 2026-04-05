@@ -31,6 +31,9 @@ MODEL_PATH = "bestFinal.pt"
 st.set_page_config(page_title="Image Input", layout="wide")
 
 st.title("📸 VocabLearn - A CNN based Computer Visison framework for automated word translation")
+st.html(
+    "<div style=font-size:20px;>Accelerate your language learning with a state-of-the-art CNN computer vision framework. Simply upload an image of your document, and our system will isolate your highlighted words, run high-accuracy OCR, translate the text, and export your new vocabulary list directly to a Word file.<br/>You can check out the source code <a href='https://github.com/projjal2025/vocabLearn', target='_blank'>Click here</a></div>"
+)
 st.header("Select how you want to provide the document image.")
 
 # --- FEATURE 1: Language Selection ---
