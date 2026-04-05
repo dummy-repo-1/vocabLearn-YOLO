@@ -14,6 +14,9 @@ from docx import Document
 import urllib.request
 
 
+MODEL_URL = "https://github.com/dummy-repo-1/vocabLearn-YOLO/releases/download/weights.v1.0/bestFinal.pt"
+MODEL_PATH = "bestFinal.pt"
+
 st.set_page_config(page_title="Image Input", layout="wide")
 
 st.title("📸 Image Capture & Upload")
@@ -61,7 +64,17 @@ if camera_input is not None:
         
         # Here is where you will call your pipeline:
         # result = your_pipeline_function(cv2_frame)
+@st.cache_resource
+def load_model():
+    # Check if the file exists locally
+    # if not os.path.exists(MODEL_PATH):
+    st.info("Downloading model weights for the first time. This may take a minute...")
+    urllib.request.urlretrieve(MODEL_URL, MODEL_PATH)
+    st.success("Model downloaded successfully!")
+        
+    return YOLO(MODEL_PATH)
 
+model = load_model()
 
 def predict_boxes(raw_image_file) :
 
@@ -185,7 +198,7 @@ def write_doc(translation, new_doc=True) :
     doc.save('translations.docx')
 
 # loading trained model
-model = YOLO("bestFinal.pt")
+# model = YOLO("bestFinal.pt")
 
 ocr_results = predict_boxes(raw_image_file)
 
